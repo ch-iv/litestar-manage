@@ -1,0 +1,21 @@
+[project]
+name = "litestar-manage"
+version = "0.1.0"
+description = "Project scaffolding tool for Litestar"
+authors = [
+    {name = "ch-iv", email = "alicesummer38@gmail.com"},
+]
+dependencies = [
+    "copier>=9.3.1",
+]
+requires-python = ">=3.8"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
