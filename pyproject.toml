@@ -19,3 +19,8 @@ build-backend = "pdm.backend"
 
 [tool.pdm]
 distribution = true
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "litestar[standard]>=2.9.1",
+]

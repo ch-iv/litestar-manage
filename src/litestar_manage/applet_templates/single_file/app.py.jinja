@@ -1,0 +1,35 @@
+"""Main application file for {{app_name}}"""
+{% if init_templates %}
+from pathlib import Path
+{% else %}
+from typing import Dict
+{% endif %}
+
+from litestar import Litestar, get
+{% if init_templates %}
+from litestar.contrib.jinja import JinjaTemplateEngine
+from litestar.template.config import TemplateConfig
+from litestar.response import Template
+{% endif %}
+
+
+{% if init_templates %}
+@get("/")
+async def index() -> Template:
+    return Template(template_name="index.html.jinja2")
+{% else %}
+@get("/")
+async def index() -> Dict[str, str]:
+    return {"hello": "world"}
+{% endif %}
+
+
+app = Litestar(
+    route_handlers=[index],
+    {% if init_templates %}
+    template_config=TemplateConfig(
+        directory=Path(__file__).parent / "templates",
+        engine=JinjaTemplateEngine,
+    ),
+    {% endif %}
+)
