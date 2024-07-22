@@ -5,6 +5,12 @@ app_name:
 init_templates:
     type: bool
     default: no
+    help: Create a templates directory?
+
+init_static_files:
+    type: bool
+    default: no
+    help: Create a static files directory?
 
 _envops:
     keep_trailing_newline: true

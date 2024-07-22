@@ -1,7 +1,8 @@
 """Main application file for {{app_name}}"""
-{% if init_templates %}
+{% if init_templates or init_static_files %}
 from pathlib import Path
-{% else %}
+{% endif %}
+{% if not init_templates %}
 from typing import Dict
 {% endif %}
 
@@ -11,8 +12,18 @@ from litestar.contrib.jinja import JinjaTemplateEngine
 from litestar.template.config import TemplateConfig
 from litestar.response import Template
 {% endif %}
+{% if init_static_files %}
+from litestar.static_files import (create_static_files_router)
+{% endif %}
+
+{% if init_static_files %}
+ASSETS_DIR = Path("assets")
 
 
+def on_startup():
+    ASSETS_DIR.mkdir(exist_ok=True)
+    ASSETS_DIR.joinpath("hello.txt").write_text("Hello, world!")
+{% endif %}
 {% if init_templates %}
 @get("/")
 async def index() -> Template:
@@ -25,11 +36,19 @@ async def index() -> Dict[str, str]:
 
 
 app = Litestar(
-    route_handlers=[index],
+    route_handlers=[
+        index,
+        {% if init_static_files %}
+        create_static_files_router(path="/static", directories=["assets"]),
+        {% endif %}
+    ],
     {% if init_templates %}
     template_config=TemplateConfig(
         directory=Path(__file__).parent / "templates",
         engine=JinjaTemplateEngine,
     ),
+    {% endif %}
+    {% if init_static_files %}
+    on_startup=[on_startup],
     {% endif %}
 )
