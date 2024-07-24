@@ -6,7 +6,6 @@ authors = [
     {name = "ch-iv", email = "alicesummer38@gmail.com"},
 ]
 dependencies = [
-    "copier>=9.3.1",
     "ruff>=0.5.4",
     "Jinja2>=3.1.4",
 ]
@@ -24,5 +23,8 @@ distribution = true
 
 [tool.pdm.dev-dependencies]
 dev = [
-    "litestar[standard]>=2.9.1",
+    "litestar>=2.9.1",
 ]
+
+[project.scripts]
+litestar-manage = "litestar_manage.cli:project_group"
