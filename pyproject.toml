@@ -17,13 +17,12 @@ license = {text = "MIT"}
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
-
 [tool.pdm]
 distribution = true
 
 [tool.pdm.dev-dependencies]
 dev = [
-    "litestar>=2.9.1",
+    "litestar[standard,cryptography,jinja]>=2.9.1",
 ]
 
 [project.scripts]
