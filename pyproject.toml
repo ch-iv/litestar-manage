@@ -26,4 +26,4 @@ dev = [
 ]
 
 [project.scripts]
-litestar-manage = "litestar_manage.cli:project_group"
+litestar = "litestar_manage.__main__:run_cli"
