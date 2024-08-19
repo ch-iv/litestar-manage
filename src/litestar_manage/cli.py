@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 from click import group, option
@@ -23,7 +22,7 @@ def project_group() -> None:
 def init_project(app_name: str) -> None:
     """CLI command to initialize a Litestar project"""
     template_dir = Path(__file__).parent / "template"
-    output_dir = Path(os.getcwd())
+    output_dir = Path.cwd()
     ctx = RenderingContext(app_name=app_name)
 
     render_template(template_dir, output_dir, ctx, run_ruff=True)

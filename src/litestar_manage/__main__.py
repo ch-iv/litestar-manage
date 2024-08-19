@@ -3,6 +3,10 @@
 # SPDX-License-Identifier: MIT
 from __future__ import annotations
 
+from typing import cast
+
+from rich_click import RichCommand
+
 
 def run_cli() -> None:
     """Application Entrypoint."""
@@ -22,7 +26,7 @@ def run_cli() -> None:
         print(exc)  # noqa: T201
         sys.exit(1)
     else:
-        litestar_group.add_command(project_group)
+        litestar_group.add_command(cast(RichCommand, project_group))
         run_litestar_cli()
 
 

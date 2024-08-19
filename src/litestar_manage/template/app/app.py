@@ -22,7 +22,7 @@ def create_app() -> Litestar:
     from app.controllers.web import WebController
 
     logging_middleware_config = LoggingMiddlewareConfig()
-    session_config = CookieBackendConfig(secret=urandom(16))  # type: ignore
+    session_config = CookieBackendConfig(secret=urandom(16))
 
     return Litestar(
         route_handlers=[
