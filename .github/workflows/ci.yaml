@@ -65,7 +65,7 @@ jobs:
         run: pdm install -G:all
 
       - name: Test with Coverage
-        run: pdm run pytest tests --cov=app --cov-report=xml
+        run: pdm run pytest tests --cov=litestar_manage --cov-report=xml
 
       - if: matrix.python-version == '3.11'
         uses: actions/upload-artifact@v4

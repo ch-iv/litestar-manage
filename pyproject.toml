@@ -53,12 +53,12 @@ exclude_lines = [
   'class .*\bProtocol\):',
   '@(abc\.)?abstractmethod',
 ]
-omit = ["*/tests/*"]
+omit = ["*/tests/*", "*/litestar_manage/template/*"]
 show_missing = true
 
 [tool.coverage.run]
 branch = true
-omit = ["tests/*"]
+omit = ["tests/*", "*/litestar_manage/template/*"]
 
 [tool.pytest.ini_options]
 addopts = ["-ra", "--ignore", "migrations"]
@@ -316,4 +316,5 @@ lint = [
 test = [
     "pytest>=8.3.2",
     "pytest-cov>=5.0.0",
+    "testfixtures>=8.3.0",
 ]
