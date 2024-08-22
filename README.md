@@ -1,18 +1,17 @@
 # litestar-manage
 
 litestar-manage is a project scaffolding tool for Litestar. It allows the user to quickly create a starter Litestar
-project using a CLI.
+project using the Litestar CLI.
 
 ## Usage
 
-To quickly create a starter project, run the following:
+When the litestar-manage module is installed, it will extend the Litestar native CLI. To create a starter project, run the following command:
 
 ```
-litestar-manage init --app-name MyProject
+litestar project init --app-name MyProject
 ```
 
-This will initialize a Litestar project named MyProject in the current working directory. The project has the following
-file tree structure:
+This command is used to initialize a Litestar project named MyProject in the current working directory. MyProject will have the following tree structure:
 
 ```
 app/
@@ -30,3 +29,5 @@ app/
 .gitignore
 README.md
 ```
+
+To initialize a virtual environment with pip, `--venv pip` can be added to the init command.
