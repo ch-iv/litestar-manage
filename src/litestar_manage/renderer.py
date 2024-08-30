@@ -101,7 +101,7 @@ def find_ruff_bin() -> Path:
     if scripts_path.is_file():
         return scripts_path
 
-    if sys.version_info >= (3, 10): # noqa: UP036
+    if sys.version_info >= (3, 10):  # noqa: UP036
         user_scheme = sysconfig.get_preferred_scheme("user")
     elif os.name == "nt":
         user_scheme = "nt_user"

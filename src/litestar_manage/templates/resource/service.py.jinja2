@@ -1,0 +1,13 @@
+from advanced_alchemy.service import SQLAlchemyAsyncRepositoryService
+from src.{{app_name.lower()}}.repository import {{app_name.capitalize()}}Repository
+from src.{{app_name.lower()}}.models import {{app_name.capitalize()}}
+from typing import Any
+
+class {{app_name.capitalize()}}Service(SQLAlchemyAsyncRepositoryService[{{app_name.capitalize()}}]):
+    """ {{app_name.capitalize()}} Service"""
+
+    repository_type = {{app_name.capitalize()}}Repository
+
+    def __init__(self, **repo_kwargs: Any) -> None:
+        self.repository: {{app_name.capitalize()}}Repository = self.repository_type(**repo_kwargs) #type ignore
+        self.model_type = self.repository.model_type

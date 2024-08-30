@@ -18,15 +18,15 @@ def create_app() -> Litestar:
     from litestar.static_files import create_static_files_router
     from litestar.template.config import TemplateConfig
 
-    from app.config import assets_path, templates_path
-    from app.controllers.web import WebController
+    from .app_controller import AppController
+    from .config import assets_path, templates_path
 
     logging_middleware_config = LoggingMiddlewareConfig()
     session_config = CookieBackendConfig(secret=urandom(16))
 
     return Litestar(
         route_handlers=[
-            WebController,
+            AppController,
             create_static_files_router(path="/static", directories=[assets_path]),
         ],
         middleware=[session_config.middleware, logging_middleware_config.middleware],

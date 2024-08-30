@@ -7,13 +7,13 @@ project using the Litestar CLI.
 
 When the litestar-manage module is installed, it will extend the Litestar native CLI. To create a starter project, run the following command:
 
-```
+```bash
 litestar project init --app-name MyProject
 ```
 
 This command is used to initialize a Litestar project named MyProject in the current working directory. MyProject will have the following tree structure:
 
-```
+```bash
 app/
 ├─ templates/
 │  ├─ index.html

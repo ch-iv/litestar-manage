@@ -306,6 +306,7 @@ distribution = true
 [tool.pdm.dev-dependencies]
 dev = [
     "litestar[standard,cryptography,jinja]>=2.9.1",
+    "black>=24.8.0",
 ]
 lint = [
     "pyright>=1.1.376",
