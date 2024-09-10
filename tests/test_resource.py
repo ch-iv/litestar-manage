@@ -4,7 +4,7 @@ import pytest
 from click.testing import CliRunner
 from testfixtures import TempDirectory
 
-from litestar_manage.cli import cli
+from litestar_manage.cli import project
 from litestar_manage.renderer import RenderingContext, _render_jinja_dir
 from tests import RESOURCE_DIR, TEMPLATE_DIR
 
@@ -20,11 +20,10 @@ def runner() -> CliRunner:
 
 
 def create_mock_project_structure(temp_path: Path) -> Path:
-    # Initialize the project structure using _render_jinja_dir
+
     ctx = RenderingContext(app_name="app_name")
     _render_jinja_dir(TEMPLATE_DIR, temp_path, ctx)
 
-    # Return the path to the generated src directory
     return temp_path / "src"
 
 
@@ -70,7 +69,7 @@ def test_render_resource_dir_no_app(rendering_context: RenderingContext, runner:
         assert not (temp_path / "src" / "user" / "models.py").exists()
 
     expected = "Project already initialized."
-    result = runner.invoke(cli, ["new", "--app-name", "TestApp"])
+    result = runner.invoke(project, ["new", "--app-name", "TestApp"])
 
     assert result.exit_code == 0
     assert expected in result.output

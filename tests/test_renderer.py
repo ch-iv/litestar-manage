@@ -2,7 +2,7 @@ import pytest
 from click.testing import CliRunner
 from testfixtures import TempDirectory
 
-from litestar_manage.cli import cli
+from litestar_manage.cli import project
 from litestar_manage.renderer import RenderingContext, _render_jinja_dir
 from tests import TEMPLATE_DIR
 
@@ -26,5 +26,5 @@ def test_render_jinja_dir(rendering_context: RenderingContext, runner: CliRunner
         assert (temp_path / "tests").exists()
         assert (temp_path / "src" / "main.py").exists()
 
-    result = runner.invoke(cli, ["new", "--app-name", "TestApp"])
+    result = runner.invoke(project, ["new", "--app-name", "TestApp"])
     assert result.exit_code == 0
