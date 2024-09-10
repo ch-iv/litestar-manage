@@ -16,11 +16,11 @@ def is_project_initialized() -> bool:
 
 
 @click.group(cls=LitestarGroup)
-def cli():
+def project():
     pass
 
 
-@cli.command(name="new", help="Initialize a new Litestar project.")
+@project.command(name="new", help="Initialize a new Litestar project.")
 @option(
     "--app-name",
     type=str,
@@ -52,7 +52,7 @@ def init_project(app_name: str, venv: str | None) -> None:
         init_venv(output_dir / "venv", builder, packages_to_install)
 
 
-@cli.command(name="resource")
+@project.command(name="resource")
 @option(
     "--resource-name",
     "-n",
