@@ -6,6 +6,7 @@ import click
 from click import group, option
 from litestar.cli._utils import LitestarGroup
 
+from litestar_manage.constants import VENV_NAME
 from litestar_manage.renderer import RenderingContext, render_template
 from litestar_manage.venv_builder import PipVenvBuilder, init_venv
 
@@ -49,7 +50,7 @@ def init_project(app_name: str, venv: str | None) -> None:
     packages_to_install = ["litestar"]
     if venv == "pip":
         builder = PipVenvBuilder()
-        init_venv(output_dir / "venv", builder, packages_to_install)
+        init_venv(output_dir / VENV_NAME, builder, packages_to_install)
 
 
 @project.command(name="resource")
