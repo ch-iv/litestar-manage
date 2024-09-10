@@ -1,7 +1,7 @@
 # Variables
 PYTHON := pdm run python
 PYTEST := pdm run pytest
-BLACK := pdm run black
+RUFF := pdm run ruff format
 FIND := find
 
 # Directories
@@ -14,7 +14,8 @@ TEST_DIR := tests
 	
 #Format the files
 format:
-	$(BLACK) $(SRC_DIR)
+	$(RUFF) $(SRC_DIR)
+	$(RUFF) $(TEST_DIR)
 
 # Clean target to delete __pycache__ directories
 clean:

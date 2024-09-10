@@ -150,6 +150,8 @@ lint.ignore = [
   "PT",
   "TD",
   "PERF203", # ignore for now; investigate
+  "COM812",
+  "ISC001"
 ]
 lint.select = ["ALL"]
 # Allow unused variables when underscore-prefixed.

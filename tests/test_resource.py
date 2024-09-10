@@ -20,7 +20,6 @@ def runner() -> CliRunner:
 
 
 def create_mock_project_structure(temp_path: Path) -> Path:
-
     ctx = RenderingContext(app_name="app_name")
     _render_jinja_dir(TEMPLATE_DIR, temp_path, ctx)
 
