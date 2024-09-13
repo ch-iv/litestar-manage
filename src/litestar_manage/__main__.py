@@ -12,7 +12,7 @@ def run_cli() -> None:
     """Application Entrypoint."""
     import sys
 
-    from litestar_manage.cli import project_group
+    from litestar_manage.cli import project
 
     try:
         from litestar.__main__ import run_cli as run_litestar_cli
@@ -26,7 +26,7 @@ def run_cli() -> None:
         print(exc)  # noqa: T201
         sys.exit(1)
     else:
-        litestar_group.add_command(cast(RichCommand, project_group))
+        litestar_group.add_command(cast(RichCommand, project))
         run_litestar_cli()
 
 
