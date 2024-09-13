@@ -1,7 +1,7 @@
 from litestar.contrib.sqlalchemy.repository import SQLAlchemyAsyncRepository
 
 
-class {{app_name.capitalize()}}Repository(SQLAlchemyAsyncRepository[{{app_name.capitalize()}}]): # pylint: disable=duplicate-bases
-    """{{app_name.capitalize()}} SQLAlchemy Repository."""
+class {{resource_name.capitalize()}}Repository(SQLAlchemyAsyncRepository[{{resource_name.capitalize()}}]): # pylint: disable=duplicate-bases
+    """{{resource_name.capitalize()}} SQLAlchemy Repository."""
 
-    model_type = {{app_name.capitalize()}}
+    model_type = {{resource_name.capitalize()}}

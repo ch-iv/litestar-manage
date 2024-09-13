@@ -5,13 +5,13 @@ from click.testing import CliRunner
 from testfixtures import TempDirectory
 
 from litestar_manage.cli import project
-from litestar_manage.renderer import RenderingContext, _render_jinja_dir
+from litestar_manage.renderer import AppRenderingContext, ResourceRenderingContext, _render_jinja_dir
 from tests import RESOURCE_DIR, TEMPLATE_DIR
 
 
 @pytest.fixture
-def rendering_context() -> RenderingContext:
-    return RenderingContext(app_name="User")
+def rendering_context() -> ResourceRenderingContext:
+    return ResourceRenderingContext(resource_name="User")
 
 
 @pytest.fixture
@@ -20,13 +20,13 @@ def runner() -> CliRunner:
 
 
 def create_mock_project_structure(temp_path: Path) -> Path:
-    ctx = RenderingContext(app_name="app_name")
+    ctx = AppRenderingContext(app_name="app_name")
     _render_jinja_dir(TEMPLATE_DIR, temp_path, ctx)
 
     return temp_path / "src"
 
 
-def test_render_resource_dir(rendering_context: RenderingContext) -> None:
+def test_render_resource_dir(rendering_context: ResourceRenderingContext) -> None:
     with TempDirectory() as t:
         temp_path = t.as_path()
 
@@ -53,7 +53,7 @@ def test_render_resource_dir(rendering_context: RenderingContext) -> None:
         assert (temp_path / "src" / "user" / "models.py").exists()
 
 
-def test_render_resource_dir_no_app(rendering_context: RenderingContext, runner: CliRunner) -> None:
+def test_render_resource_dir_no_app(rendering_context: ResourceRenderingContext, runner: CliRunner) -> None:
     with TempDirectory() as t:
         temp_path = t.as_path()
 

@@ -7,6 +7,7 @@ import sys
 import sysconfig
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Union
 
 from jinja2 import Template
 
@@ -14,7 +15,7 @@ from jinja2 import Template
 def render_template(
     template_dir: Path,
     output_dir: Path,
-    ctx: AppRenderingContext,
+    ctx: Union[AppRenderingContext, ResourceRenderingContext],
     run_ruff: bool = True,
 ) -> None:
     """Renders a template from template_dir to output_dir using the provided context.
@@ -42,10 +43,17 @@ class AppRenderingContext:
     app_name: str
 
 
+@dataclass
+class ResourceRenderingContext:
+    """Context for rendering resource (controller, service, dto, model and repository)."""
+
+    resource_name: str
+
+
 def _render_jinja_dir(
     input_directory: Path,
     output_directory: Path,
-    ctx: AppRenderingContext,
+    ctx: Union[AppRenderingContext, ResourceRenderingContext],
 ) -> list[Path]:
     """Recursively renders all files in the input directory to the output directory,
     while preserving the file-tree structure. Returns the list of paths to the created files.
