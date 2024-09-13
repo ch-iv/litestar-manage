@@ -7,7 +7,7 @@ from click import group, option
 from litestar.cli._utils import LitestarGroup
 
 from litestar_manage.constants import VENV_NAME
-from litestar_manage.renderer import RenderingContext, render_template
+from litestar_manage.renderer import AppRenderingContext, render_template
 from litestar_manage.venv_builder import PipVenvBuilder, init_venv
 
 
@@ -44,7 +44,7 @@ def init_project(app_name: str, venv: str | None) -> None:
         click.echo("Project already initialized.")
         return
 
-    ctx = RenderingContext(app_name=app_name)
+    ctx = AppRenderingContext(app_name=app_name)
     render_template(template_dir, output_dir, ctx, run_ruff=True)
 
     packages_to_install = ["litestar"]
@@ -69,6 +69,6 @@ def generate_resource(resource_name: str) -> None:
 
     template_dir = Path(__file__).parent / "templates" / "resource"
     output_dir = Path.cwd() / "src" / f"{resource_name.lower()}"
-    ctx = RenderingContext(app_name=resource_name)
+    ctx = ResourceRenderingContext(app_name=resource_name)
 
     render_template(template_dir, output_dir, ctx, run_ruff=True)

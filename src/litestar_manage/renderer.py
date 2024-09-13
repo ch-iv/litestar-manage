@@ -14,7 +14,7 @@ from jinja2 import Template
 def render_template(
     template_dir: Path,
     output_dir: Path,
-    ctx: RenderingContext,
+    ctx: AppRenderingContext,
     run_ruff: bool = True,
 ) -> None:
     """Renders a template from template_dir to output_dir using the provided context.
@@ -36,7 +36,7 @@ def render_template(
 
 
 @dataclass
-class RenderingContext:
+class AppRenderingContext:
     """Context for rendering an application template."""
 
     app_name: str
@@ -45,7 +45,7 @@ class RenderingContext:
 def _render_jinja_dir(
     input_directory: Path,
     output_directory: Path,
-    ctx: RenderingContext,
+    ctx: AppRenderingContext,
 ) -> list[Path]:
     """Recursively renders all files in the input directory to the output directory,
     while preserving the file-tree structure. Returns the list of paths to the created files.
