@@ -6,7 +6,7 @@ from testfixtures import TempDirectory
 
 from litestar_manage.cli import project
 from litestar_manage.renderer import AppRenderingContext, ResourceRenderingContext, _render_jinja_dir
-from tests import RESOURCE_DIR, TEMPLATE_DIR
+from tests import RESOURCE_TEMPLATE_DIR, APP_TEMPLATE_DIR
 
 
 @pytest.fixture
@@ -21,7 +21,7 @@ def runner() -> CliRunner:
 
 def create_mock_project_structure(temp_path: Path) -> Path:
     ctx = AppRenderingContext(app_name="app_name")
-    _render_jinja_dir(TEMPLATE_DIR, temp_path, ctx)
+    _render_jinja_dir(APP_TEMPLATE_DIR, temp_path, ctx)
 
     return temp_path / "src"
 
@@ -36,7 +36,7 @@ def test_render_resource_dir(rendering_context: ResourceRenderingContext) -> Non
 
         assert src_path.exists()
 
-        _render_jinja_dir(RESOURCE_DIR, temp_path / resource_path, rendering_context)
+        _render_jinja_dir(RESOURCE_TEMPLATE_DIR, temp_path / resource_path, rendering_context)
 
         assert (temp_path / "src").exists()
         assert (temp_path / "tests").exists()
@@ -57,7 +57,7 @@ def test_render_resource_dir_no_app(rendering_context: ResourceRenderingContext,
     with TempDirectory() as t:
         temp_path = t.as_path()
 
-        _render_jinja_dir(RESOURCE_DIR, temp_path, rendering_context)
+        _render_jinja_dir(RESOURCE_TEMPLATE_DIR, temp_path, rendering_context)
 
         assert not (temp_path / "src").exists()
         assert not (temp_path / "src" / "user" / "__init__.py").exists()
