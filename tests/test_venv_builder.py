@@ -9,7 +9,7 @@ def test_pip_venv_builder() -> None:
     with TempDirectory() as t:
         temp_path = t.as_path()
         builder = PipVenvBuilder(nopip=True)
-        builder.install_packages = MagicMock() # type: ignore[method-assign]
+        builder.install_packages = MagicMock()  # type: ignore[method-assign]
         init_venv(temp_path, builder, ["litestar"])
 
         assert builder.venv_path is not None

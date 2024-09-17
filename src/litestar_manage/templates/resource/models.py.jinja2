@@ -1,0 +1,7 @@
+from litestar.contrib.sqlalchemy.base import BigIntAuditBase
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+
+class {{resource_name.capitalize()}}(BigIntAuditBase):
+    """{{resource_name.capitalize()}} in DB model"""
+    pass

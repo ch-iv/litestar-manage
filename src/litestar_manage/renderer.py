@@ -7,6 +7,7 @@ import sys
 import sysconfig
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Union
 
 from jinja2 import Template
 
@@ -14,7 +15,7 @@ from jinja2 import Template
 def render_template(
     template_dir: Path,
     output_dir: Path,
-    ctx: RenderingContext,
+    ctx: Union[AppRenderingContext, ResourceRenderingContext],
     run_ruff: bool = True,
 ) -> None:
     """Renders a template from template_dir to output_dir using the provided context.
@@ -36,16 +37,23 @@ def render_template(
 
 
 @dataclass
-class RenderingContext:
+class AppRenderingContext:
     """Context for rendering an application template."""
 
     app_name: str
 
 
+@dataclass
+class ResourceRenderingContext:
+    """Context for rendering resource (controller, service, dto, model and repository)."""
+
+    resource_name: str
+
+
 def _render_jinja_dir(
     input_directory: Path,
     output_directory: Path,
-    ctx: RenderingContext,
+    ctx: Union[AppRenderingContext, ResourceRenderingContext],
 ) -> list[Path]:
     """Recursively renders all files in the input directory to the output directory,
     while preserving the file-tree structure. Returns the list of paths to the created files.
@@ -101,7 +109,7 @@ def find_ruff_bin() -> Path:
     if scripts_path.is_file():
         return scripts_path
 
-    if sys.version_info >= (3, 10): # noqa: UP036
+    if sys.version_info >= (3, 10):  # noqa: UP036
         user_scheme = sysconfig.get_preferred_scheme("user")
     elif os.name == "nt":
         user_scheme = "nt_user"

@@ -1,0 +1,10 @@
+from advanced_alchemy.extensions.litestar.dto import SQLAlchemyDTO, SQLAlchemyDTOConfig
+
+from src.{{resource_name.lower()}}.models import {{resource_name.capitalize()}}
+
+
+class {{resource_name.capitalize()}}DTO(SQLAlchemyDTO[{{resource_name.capitalize()}}]):
+    """
+    {{resource_name.capitalize()}} DTO
+    """
+    config = SQLAlchemyDTOConfig()

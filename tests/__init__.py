@@ -1,3 +1,4 @@
 from pathlib import Path
 
-TEMPLATE_DIR = Path(__file__).parent.parent / "src" / "litestar_manage" / "template"
+APP_TEMPLATE_DIR = Path(__file__).parent.parent / "src" / "litestar_manage" / "templates" / "app"
+RESOURCE_TEMPLATE_DIR = Path(__file__).parent.parent / "src" / "litestar_manage" / "templates" / "resource"
